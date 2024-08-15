@@ -3,7 +3,7 @@ name: base-image-build
 on:
   push:
     paths:
-      - "dev-sec-ops/base-image/**"
+      - "dev-sec-ops/base-images/**"
 
 jobs:
   build-base-images:

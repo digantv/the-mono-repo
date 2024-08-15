@@ -1,0 +1,14 @@
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get install -y openjdk-17-jdk
+RUN apt-get install -y git
+RUN apt-get install -y maven
+
+WORKDIR /app
+
+COPY /target/api-gateway-0.1.jar /app/api-gateway-0.1.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "api-gateway-0.1.jar"]

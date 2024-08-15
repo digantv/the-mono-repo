@@ -58,4 +58,4 @@ jobs:
           password: ${{secrets.DOCKER_REGISTRY_PAT}}
 
       - name: Push Docker Images
-        run: docker push ${{secrets.DOCKER_REGISTRY_USER}}/openjdk-24-slim:latest
+        run: docker push ${{secrets.DOCKER_REGISTRY_USER}}/openjdk:latest

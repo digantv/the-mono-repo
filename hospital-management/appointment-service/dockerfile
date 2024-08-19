@@ -11,4 +11,4 @@ COPY /target/appointment-service-latest.jar /app/appointment-service-latest.jar
 
 EXPOSE 8084
 
-CMD ["java", "-jar", "appointment-service-latest.jar"]
+CMD ["java", "-jar", "appointment-service-latest.jar"] 

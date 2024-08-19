@@ -11,5 +11,5 @@ COPY /target/directory-service-latest.jar /app/directory-service.jar
 
 EXPOSE 8081
 
-CMD ["java", "-jar", "directory-service.jar"]
+CMD ["java", "-jar", "directory-service.jar"] 
 

@@ -11,4 +11,4 @@ COPY /target/patient-service-latest.jar /app/patient-service-latest.jar
 
 EXPOSE 8082
 
-CMD ["java", "-jar", "patient-service-latest.jar"]
+CMD ["java", "-jar", "patient-service-latest.jar"] 

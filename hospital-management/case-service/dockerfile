@@ -11,5 +11,5 @@ COPY /target/case-service-latest.jar /app/case-service-latest.jar
 
 EXPOSE 8083
 
-CMD ["java", "-jar", "case-service-latest.jar"]
+CMD ["java", "-jar", "case-service-latest.jar"] 
 

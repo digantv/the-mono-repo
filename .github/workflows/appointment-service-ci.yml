@@ -18,7 +18,7 @@ jobs:
           args: --path=.
 
       - name: Build Appointment Service
-        run: docker build -t ${{secrets.DOCKER_REGISTRY_USER}}/appointment-service:latest -f appointment-service.dockerfile .
+        run: docker build -t ${{secrets.DOCKER_REGISTRY_USER}}/appointment-service:latest -f appointment-service/dockerfile .
 
       - name: Login to Github Docker Registry
         uses: docker/login-action@v2

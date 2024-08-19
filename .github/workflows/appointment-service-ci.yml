@@ -3,7 +3,12 @@ name: appointment-service-ci
 on:
   push:
     branches:
-      - main
+      - "**"
+    tags:
+      - "**"
+  pull_request:
+    branches:
+      - "**"
 
 jobs:
   build-appointment-service:

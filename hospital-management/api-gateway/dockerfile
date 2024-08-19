@@ -11,4 +11,4 @@ COPY /target/api-gateway-0.1.jar /app/api-gateway-0.1.jar
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "api-gateway-0.1.jar"]
+CMD ["java", "-jar", "api-gateway-latest.jar"]

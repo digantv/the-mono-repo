@@ -1,0 +1,25 @@
+name: openjdk-base-image-build
+
+on:
+  push:
+    paths:
+      - "dev-sec-ops/base-images/openjdk-24-slim.dockerfile"
+
+jobs:
+  build-openjdk-24-slim-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build base image
+        run: docker build -t ${{secrets.DOCKER_REGISTRY_USER}}/openjdk:latest -f dev-sec-ops/base-images/openjdk-24-slim.dockerfile .
+
+      - name: Login to Github Docker Registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{secrets.DOCKER_REGISTRY_USER}}
+          password: ${{secrets.DOCKER_REGISTRY_PAT}}
+
+      - name: Push Docker Images
+        run: docker push ${{secrets.DOCKER_REGISTRY_USER}}/openjdk:latest

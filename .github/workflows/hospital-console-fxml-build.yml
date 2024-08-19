@@ -1,0 +1,49 @@
+name: hospital-console-fxml-build
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "**"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pre-commit-scans:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          distribution: "temurin"
+          java-version: "21"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Navigate and run Commands
+        working-directory: the-mono-repo/hospital-console-fxml
+        run: |
+          echo "Current Directory: $(pwd)"
+          ls
+
+      - name: Gitleaks scan
+        uses: zricethezav/gitleaks-action@v1.3.0
+        with:
+          args: --path=.
+
+      - name: build code and create docker image
+        working-directory: the-mono-repo/hospital-console-fxml
+        run: mvn clean install docker:build -Dimage.registry=${{secrets.DOCKER_REGISTRY_USER}} -Dimage.tag=latest
+
+      - name: Login to Github Docker Registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{secrets.DOCKER_REGISTRY_USER}}
+          password: ${{secrets.DOCKER_REGISTRY_PAT}}
+
+      - name: Push Docker Images
+        run: docker push ${{secrets.DOCKER_REGISTRY_USER}}/hospital-console-fxml:latest

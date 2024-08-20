@@ -1,4 +1,4 @@
-name: CI/CD Workflow
+name: Appointment Service CI/CD Workflow
 
 on:
   push:
@@ -24,9 +24,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Perform google formatter check
-        run: mvn com.spotify.fmt:fmt-maven-plugin:format
-        working-directory: hospital-management/appointment-service
+      #   - name: Perform google formatter check
+      #     run: mvn com.spotify.fmt:fmt-maven-plugin:format
+      #     working-directory: hospital-management/appointment-service
 
       - name: GitLeaks Scan
         uses: zricethezav/gitleaks-action@v1.3.0

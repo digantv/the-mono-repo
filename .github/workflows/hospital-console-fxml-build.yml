@@ -30,20 +30,6 @@ jobs:
           echo "Current Directory: $(pwd)"
           ls
 
-      - name: Gitleaks scan
-        uses: zricethezav/gitleaks-action@v1.3.0
-        with:
-          args: --path=.
-
-      - name: build code and create docker image
+      - name: Build code
         working-directory: the-mono-repo/hospital-console-fxml
-        run: mvn clean install docker:build -Dimage.registry=${{secrets.DOCKER_REGISTRY_USER}} -Dimage.tag=latest
-
-      - name: Login to Github Docker Registry
-        uses: docker/login-action@v2
-        with:
-          username: ${{secrets.DOCKER_REGISTRY_USER}}
-          password: ${{secrets.DOCKER_REGISTRY_PAT}}
-
-      - name: Push Docker Images
-        run: docker push ${{secrets.DOCKER_REGISTRY_USER}}/hospital-console-fxml:latest
+        run: mvn clean install

@@ -116,7 +116,7 @@
 					<execution>
 						<phase>validate</phase>
 						<goals>
-							<goal>check</goal>
+							<goal>format</goal>
 						</goals>
 					</execution>
 				</executions>

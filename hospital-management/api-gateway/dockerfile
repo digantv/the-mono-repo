@@ -1,14 +1,12 @@
 FROM digantv/openjdk:latest
-
-RUN apt-get update
-RUN apt-get install -y openjdk-17-jdk
-RUN apt-get install -y git
-RUN apt-get install -y maven
-
 WORKDIR /app
 
-COPY /target/api-gateway-0.1.jar /app/api-gateway-0.1.jar
+ARG imageName
+
+ENV IMAGE_NAME=${imageName}
+
+COPY /target/${IMAGE_NAME}.jar /app/${IMAGE_NAME}.jar
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "api-gateway-0.1.jar"]
+CMD ["sh", "-c", "java -jar /app/${IMAGE_NAME}.jar"]

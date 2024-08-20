@@ -11,7 +11,6 @@
 		<maven.compiler.source>17</maven.compiler.source>
 	</properties>
 	<dependencies>
-		<!-- Spring Cloud Gateway>  -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
@@ -40,6 +39,53 @@
 					<execution>
 						<goals>
 							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.44.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<images>
+						<image>
+							<name>dnyanyog.org/${project.artifactId}:latest</name>
+							<build>
+								<dockerFile>${project.basedir}/dockerfile</dockerFile>
+								<args>
+									<imageName>${project.artifactId}-latest</imageName>
+								</args>
+							</build>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.ossindex.maven</groupId>
+				<artifactId>ossindex-maven-plugin</artifactId>
+				<configuration>
+					<reportFile>${project.build.directory}/audit-report.json</reportFile>
+					<!--fail>true</fail-->
+				</configuration>
+				<executions>
+					<execution>
+						<id>audit-dependencies</id>
+						<goals>
+							<goal>audit</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
 						</goals>
 					</execution>
 				</executions>

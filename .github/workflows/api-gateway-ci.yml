@@ -43,7 +43,7 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/api-gateway:latest
+          docker push digantv/api-gateway:latest
         working-directory: hospital-management/api-gateway
 
       - name: Log in to GitHub Docker Registry

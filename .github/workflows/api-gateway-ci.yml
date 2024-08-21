@@ -41,8 +41,9 @@ jobs:
         if: false
         run: mvn org.owasp:dependency-check-maven:check
 
-      - name: Build code and create docker images
-        run: mvn clean install docker:build -Dimage.registry=${{secrets.CONTAINER_REGISTRY_URL}} -Dimage.tag=$GITHUB_REF_NAME
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/api-gateway:${{ github.ref_name }}
         working-directory: hospital-management/api-gateway
 
       - name: Log in to GitHub Docker Registry

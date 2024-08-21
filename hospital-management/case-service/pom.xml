@@ -121,6 +121,22 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.sonatype.ossindex.maven</groupId>
+				<artifactId>ossindex-maven-plugin</artifactId>
+				<configuration>
+					<reportFile>${project.build.directory}/audit-report.json</reportFile>
+					<!--fail>true</fail-->
+				</configuration>
+				<executions>
+					<execution>
+						<id>audit-dependencies</id>
+						<goals>
+							<goal>audit</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

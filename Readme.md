@@ -1,0 +1,1 @@
+# A mono repo for hospital management application
